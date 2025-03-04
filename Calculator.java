@@ -1,46 +1,95 @@
 package com.example.calculator;
 
-import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-import static javax.management.Query.div;
-
 public class Calculator {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int count = 0;
-        do {
-            count++;
-            System.out.println(count + "번째 계산");
-            System.out.print("첫 번째 숫자를 입력하세요: ");
-            int n1 = scanner.nextInt();
-            System.out.print("두 번째 숫자를 입력하세요: ");
-            int n2 = scanner.nextInt();
-            System.out.print("연산자를 입력하세요: (+,-,*,/ 가능) ");
-            String input = scanner.next();
-            char method = input.charAt(0);
+    // 1. 속성
+    private double result;
+    private int input1;
+    private int input2;
+    private char method;
+    private ArrayList<Double> results = new ArrayList<>();
 
-            if (method == '+') {
-                System.out.println("결과: " + n1 + " + " + n2 + " = " + (n1 + n2));
-            } else if (method == '-') {
-                System.out.println("결과: " + n1 + " - " + n2 + " = " + (n1 - n2));
-            } else if (method == '*') {
-                System.out.println("결과: " + n1 + " * " + n2 + " = " + (n1 * n2));
-            } else if (method == '/') {
-                if (n2 == 0) {
-                    System.out.println("0으로 나눌 수 없습니다.");
-                } else {
-                    System.out.println("결과: " + n1 + " / " + n2 + " = " + (n1 / (double) n2));
-                }
+    // 2. 생성자
+
+    // 3. 기능
+    // 게터로 결과값 불러오기
+    public ArrayList<Double> getResults() {
+        return this.results;
+    }
+
+    public double getResult() {
+        return this.result;
+    }
+
+    public int getInput1() {
+        return this.input1;
+    }
+
+    public int getInput2() {
+        return this.input2;
+    }
+
+    public char getMethod(char method) {
+        return this.method;
+    }
+
+    // 세터로 값 설정하기
+    void setInput1(int input) {
+        this.input1 = input;
+    }
+
+    void setInput2(int input) {
+        this.input2 = input;
+    }
+
+    void setMethod(char method) {
+        this.method = method;
+    }
+
+    void setResult(ArrayList<Double> results){
+        this.results = results;
+    }
+
+    // 계산기 메소드 만들기
+    void calculate() {
+        int value1 = this.input1;
+        int value2 = this.input2;
+        char method = this.method;
+
+        if (method == '+') {
+            this.result = (double) value1 + value2;
+            this.results.add(result);
+            System.out.println(this.result);
+        } else if (method == '-') {
+            this.result = (double) value1 - value2;
+            this.results.add(result);
+            System.out.println(this.result);
+        } else if (method == '*') {
+            this.result = (double) value1 * value2;
+            this.results.add(result);
+            System.out.println(this.result);
+        } else if (method == '/') {
+            if (value2 != 0) {
+                this.result = value1 / (double) value2;
+                this.results.add(result);
+                System.out.println(this.result);
             } else {
-                System.out.println("올바른 값을 입력하세요");
+                System.out.println("0으로 나눌 수 없습니다.");
             }
-
-            System.out.print("더 계산하시겠습니까? (exit 입력 시 종료): ");
-            String retry = scanner.next();
-            if (retry.equals("exit")) {
-                count = -1;
-            }
-        } while (count != -1);
+        } else {
+            System.out.println("올바른 값을 입력하세요");
         }
     }
+    public void deleteHistory() {
+        if (!results.isEmpty()) {
+            double firstResult = results.get(0);
+            results.remove(firstResult);
+            System.out.println(firstResult + "가 삭제되었습니다.");
+        } else {
+            System.out.println("계산 히스토리가 없습니다.");
+        }
+    }
+}
+
