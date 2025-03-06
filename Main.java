@@ -29,10 +29,12 @@ public class Main {
                 break;
             }
         }
-
-        System.out.print("비교하고 싶은 값을 입력하세요 ");
-        double input3 = sc.nextDouble();
-        arithmeticCalculator.resultsGreaterThanInput(input3);
+        System.out.print("결과값을 비교하시겠습니까? (yes 입력 시 실행)");
+        String answer = sc.next();
+        if (answer.equals("yes")) {
+            System.out.print("비교하고 싶은 값을 입력하세요 ");
+            double input3 = sc.nextDouble();
+            arithmeticCalculator.resultsGreaterThanInput(input3);
+        }
     }
-
 }
