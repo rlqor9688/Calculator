@@ -20,7 +20,7 @@ enum OperatorType {
         }},
     DIVIDE("/"){
         public double apply(double a, double b) {
-            if (b==0) throw new ArithmeticException("0으로 나눌 수 없습니다.");
+            if (b==0) throw new ArithmeticException();
             return a / b;
         }
     };

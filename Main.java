@@ -21,7 +21,7 @@ public class Main {
             try {
                 arithmeticCalculator.calculate(input1, input2, operator);
             } catch (ArithmeticException e) {
-                e.printStackTrace();
+                System.out.println("0으로 나눌 수 없습니다.");
             }
 
             System.out.print("계속하시겠습니까? (exit 입력 시 종료) ");
